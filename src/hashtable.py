@@ -66,7 +66,23 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        hash_mod = self._hash_mod(key)
+        if not self.storage[hash_mod]:
+            print(f'Hash[{key}] cannot be deleted: it does not exist')
+            return
+        current_node = self.storage[hash_mod]
+        prev_node = None
+        if current_node.key == key and not current_node.next:
+            self.storage[hash_mod] = None
+        elif current_node.key == key:
+            self.storage[hash_mod] = self.storage[hash_mod].next
+        else:
+            while current_node:
+                if current_node.key == key:
+                    prev_node.next = current_node.next
+                    return
+                prev_node = current_node
+                current_node = current_node.next
 
 
     def retrieve(self, key):
