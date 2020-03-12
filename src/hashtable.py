@@ -54,7 +54,14 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        if not None in self.storage:
+            self.resize()
+        hash_mod = self._hash_mod(key)
+        # if we have something at the hash_mod index, append this value. Using LinkedPair.append will overwrite a value if that value already exists, and traverse over all the values
+        if self.storage[hash_mod]:
+            self.storage[hash_mod].append(key, value)
+        else:
+            self.storage[hash_mod] = LinkedPair(key, value)
 
 
 
