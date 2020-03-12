@@ -7,6 +7,36 @@ class LinkedPair:
         self.value = value
         self.next = None
 
+    def __str__(self):
+        return f"{{{self.key}, {self.value}}}"
+
+    def __repr__(self):
+        next = None
+        if self.next:
+            next = self.next.key
+        return f"{{key: {self.key}, value: {self.value}, next_key: {next}}}"
+
+    # These little helpers keep our hash methods clean
+
+    # append an item at the end of our linked pair chain. if the item exists overwrite it
+    def append(self, key, value):
+        if self.key == key:
+            self.value = value
+        elif not self.next:
+            self.next = LinkedPair(key, value)
+        else:
+            self.next.append(key, value)
+
+    # retrieve an item from our linked list chain
+    def retrieve(self, key):
+        if self.key == key:
+            return self.value
+        elif not self.next:
+            print(f"Hash[{key}] is undefined")
+            return None
+        else:
+            return self.next.retrieve(key)
+
 class HashTable:
     '''
     A hash table that with `capacity` buckets
