@@ -87,7 +87,16 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+
+        self.capacity *= 2
+        old_storage = self.storage
+        self.storage = [None] * self.capacity
+        for node in old_storage:
+            if node:
+                current_node = node
+                while current_node:
+                    self.insert(current_node.key, current_node.value)
+                    current_node = current_node.next
 
 
 
