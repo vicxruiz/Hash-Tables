@@ -77,7 +77,12 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        hash_mod = self._hash_mod(key)
+        if self.storage[hash_mod]:
+            return self.storage[hash_mod].retrieve(key)
+        else:
+            print(f"Hash[{key}] is undefined")
+            return None
 
 
     def resize(self):
